@@ -1,35 +1,27 @@
 'use client'
 
-import { useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Mail } from 'lucide-react'
+import GithubIcon from '../ui/GithubIcon'
+import LinkedinIcon from '../ui/LinkedinIcon'
 
-type Star = { id: number; x: number; y: number; size: number; delay: number; duration: number }
-
-function useStars(count: number): Star[] {
-  return useMemo(
-    () =>
-      Array.from({ length: count }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 1.5 + 0.5,
-        delay: Math.random() * 4,
-        duration: Math.random() * 5 + 3,
-      })),
-    [count],
-  )
-}
+// ── Generated once at module level — never inside the component ──
+const STARS = Array.from({ length: 70 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 1.5 + 0.5,
+  delay: Math.random() * 4,
+  duration: Math.random() * 5 + 3,
+}))
 
 export default function Hero() {
-  const stars = useStars(70)
-
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 overflow-hidden">
 
       {/* ── Stars ───────────────────────────────────────────── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {stars.map((s) => (
+        {STARS.map((s) => (
           <motion.div
             key={s.id}
             className="absolute rounded-full"
@@ -66,7 +58,6 @@ export default function Hero() {
           animate={{ rotate: 360 }}
           transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
         />
-        {/* Orbiting dot */}
         <motion.div
           className="absolute w-[3px] h-[3px] rounded-full"
           style={{
@@ -85,7 +76,6 @@ export default function Hero() {
       {/* ── Content ─────────────────────────────────────────── */}
       <div className="relative z-10 max-w-5xl pt-24">
 
-        {/* Coordinates */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -97,11 +87,10 @@ export default function Hero() {
           RA 14h 29m · DEC +02° 44&apos; · NODE_001
         </motion.div>
 
-        {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] as const }}
           className="font-display leading-[0.88] mb-6"
           style={{
             fontSize: 'clamp(5rem, 14vw, 11rem)',
@@ -114,7 +103,6 @@ export default function Hero() {
           <em style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Kalu</em>
         </motion.h1>
 
-        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -125,7 +113,6 @@ export default function Hero() {
           Full-Stack Engineer navigating the edge of AI
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -145,9 +132,9 @@ export default function Hero() {
 
           <div className="flex items-center gap-2">
             {[
-              { icon: Github,   href: 'https://github.com/dkay9',                       label: 'GitHub' },
-              { icon: Linkedin, href: 'https://www.linkedin.com/in/kalu-david/',         label: 'LinkedIn' },
-              { icon: Mail,     href: 'mailto:kaludavid411@gmail.com',                   label: 'Email' },
+              { icon: GithubIcon,   href: 'https://github.com/dkay9',               label: 'GitHub' },
+              { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/kalu-david/', label: 'LinkedIn' },
+              { icon: Mail,         href: 'mailto:kaludavid411@gmail.com',           label: 'Email' },
             ].map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
@@ -190,7 +177,6 @@ export default function Hero() {
         scroll to explore
       </motion.div>
 
-      {/* ── Bottom-right label ──────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

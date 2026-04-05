@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Github } from 'lucide-react'
+import GithubIcon from '../ui/GithubIcon'
 
 export default function ProjectsAIML() {
   const ref    = useRef<HTMLElement>(null)
@@ -146,7 +146,7 @@ export default function ProjectsAIML() {
               ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'
             }}
           >
-            <Github size={13} strokeWidth={1.5} />
+            <GithubIcon size={13} />
             Watch on GitHub
           </a>
         </motion.div>

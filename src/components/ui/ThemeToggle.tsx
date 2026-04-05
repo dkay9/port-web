@@ -1,19 +1,17 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
 import { Sun, Moon } from 'lucide-react'
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
 
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return <div className="w-8 h-8" />
+  // resolvedTheme is undefined during SSR — render placeholder until hydrated
+  if (!resolvedTheme) return <div className="w-8 h-8" />
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle theme"
       className="w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300"
       style={{
@@ -29,7 +27,7 @@ export default function ThemeToggle() {
         ;(e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'
       }}
     >
-      {theme === 'dark'
+      {resolvedTheme === 'dark'
         ? <Sun size={12} strokeWidth={1.5} />
         : <Moon size={12} strokeWidth={1.5} />
       }

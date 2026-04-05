@@ -17,7 +17,11 @@ export default function About() {
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: 22 },
     animate: inView ? { opacity: 1, y: 0 } : {},
-    transition: { duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] },
+    transition: { 
+        duration: 0.85, 
+        delay, 
+        ease: [0.16, 1, 0.3, 1] as const,
+    },
   })
 
   return (

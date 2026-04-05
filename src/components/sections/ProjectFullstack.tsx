@@ -2,8 +2,9 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Github, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import { fullStackProjects } from '@/data/projects'
+import GithubIcon from '../ui/GithubIcon'
 
 export default function ProjectsFullStack() {
   const ref    = useRef<HTMLElement>(null)
@@ -144,7 +145,7 @@ export default function ProjectsFullStack() {
                             ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)'
                           }}
                         >
-                          <Github size={13} strokeWidth={1.5} />
+                          <GithubIcon size={13} /> {/*<GithubIcon size={13} strokeWidth={1.5} /> */}
                         </a>
                       )}
                       {project.live && (
